@@ -7,7 +7,12 @@ end
  
 def game_over?
 # check conditions to see who won or lost and set Player.status to won or lost accordingly
+ board_condition = [self.icon, self.icon, self.icon]  # player's icon needs to appear consecutively 3 times
+ victory_test = board    # use the current board condtion to test if a player has won
+ victory_test = [[0..2], [3..5], [6..8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]  # winning with 3 in a row
+ if board.full? || victory_test.include?(board_condition) return true  
  
+
  
  
 # if all squares are taken then the game is also over, set both Player.status to drawn and return true
@@ -62,18 +67,29 @@ end
  
 player1 = Player.new
 player2 = Player.new
-Player1.icon = "X"
-Player2.icon = "O"
+player1.icon = "X"
+player2.icon = "O"
 board = Array.new["empty", 8]
 turn = 1
  
 # Get player names
 puts "Please enter the first player's name"
-Player1.name = gets.chomp
+player1.name = gets.chomp.to_s
 puts "Please enter the second player's name"
-Player2.name = gets.chomp
+player2.name = gets.chomp.to_s
 
  
+while !game_over
+  show_board
+  # get player 1 move
+  # get player 2 move
+
+end
+
+puts "Game is over. The winner is #{winner}. Thanks for playing."
+
+# the below is old code
+
 while !game_over?  # start loop to play until the game is over
   # Player 1 gets to move & pass turns back and forth via a turn token??
   while turn < 10 do
