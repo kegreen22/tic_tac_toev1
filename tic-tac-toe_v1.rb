@@ -33,7 +33,7 @@ class Match
   return false
 
   elsif 
-  @board[action.to_i] == nil # if the square is empty (nil) return true (it is a valid choice)
+  @board[action.to_i] == "" # if the square is empty return true (it is a valid choice)
   return true
     
   else
@@ -77,7 +77,7 @@ player2 = Player.new
 player1.icon = "X"
 player2.icon = "O"
 tic_tac = Match.new   # start new tic tac toe game
-tic_tac.board = Array.new(9)   # create board with 9 empty squares set to "nil"
+tic_tac.board = Array.new(9, "")   # create board with 9 empty squares set to ""
 tic_tac.winner = "noone"   # noone wins the game until a winner is declared
 game_turn = 1   # start from turn 1
  
@@ -88,10 +88,10 @@ puts "Please enter the second player's name"
 player2.name = gets.chomp
 
  
-while (tic_tac.game != "over" || @board.include?(nil)) # game is over when game is over or when all squares are taken without a winner (game over)
-  tic_tac.show_board()
+while (tic_tac.game != "over" || tic_tac.board.include?("")) # game is over when game is over or when all squares are taken without a winner (game over)
+  tic_tac.show_board
   tic_tac.turn(player1)
-  tic_tac.show_board()
+  tic_tac.show_board
   tic_tac.turn(player2)
   game_turn+=1
 
