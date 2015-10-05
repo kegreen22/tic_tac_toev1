@@ -47,21 +47,20 @@ class Match
 
 
   def victory_check(player_name, player_icon)
-    player_victory = [player_icon, player_icon, player_icon]  # player's icon needs to appear consecutively 3 times
+    player_victory = player_icon + player_icon + player_icon  # player's icon needs to appear consecutively 3 times
 
 
-    victory_1 = @board[0,1,2]
-    victory_2 = @board[3,4,5]
-    victory_3 = @board[6,7,8]
-    victory_4 = @board[0,3,6]
-    victory_5 = @board[1,4,7]
-    victory_6 = @board[2,5,8]
-    victory_7 = @board[0,4,8]
-    victory_8 = @board[2,4,6]
+    victory_1 = @board[0]+@board[1]+@board[2]
+#    victory_2 = @board[3][4][5]
+#    victory_3 = @board[6][7][8]
+#    victory_4 = @board[0][3][6]
+#    victory_5 = @board[1][4][7]
+#    victory_6 = @board[2][5][8]
+#    victory_7 = @board[0][4][8]
+#    victory_8 = @board[2][4][6]
 
-    if ((player_victory.eql?(victory_1)) || (player_victory.eql?(victory_2)) || (player_victory.eql?(victory_3)) || (player_victory.eql?(victory_4)) || (player_victory.eql?(victory_5)) ||
-     (player_victory.eql?(victory_6)) || (player_victory.eql?(victory_7)) || (player_victory.eql?(victory_8)))
-     @winner = player_name
+    if (player_victory==victory_1) #|| (player_victory.eql?(victory_2))
+       @winner = player_name
       @game_over = true
     else
       return
