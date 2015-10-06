@@ -8,27 +8,30 @@ class Match
   attr_accessor :board, :game_over, :winner
 
   def turn(player_name, player_icon)
-    puts "Please make your move -- remember to choose a number between 0 and 8 (or q to quit)"
+    puts "Please make your move #{player_name} -- remember to choose a number between 0 and 8 (or q to quit)"
     action = gets.chomp
+    if action == "q"   # end the game via quitting
+    @winner = "noone"
+    @game_over = true
+    # the game is over without a winner
+    end
+
     if valid_move(action)   # check the validity of the player's move
     @board[action.to_i] = player_icon
+    victory_check(player_name, player_icon)   # check victory conditions at end of each player's turn
     else
     turn(player_name, player_icon)
     end   # end of if statement
 
-      victory_check(player_name, player_icon)   # check victory conditions at end of each player's turn
-    return # return to execute the game's main while loop
+
+    # return # return to execute the game's main while loop
 
   end   # end of turn method
 
 
   def valid_move(action)
-    if action == "q"   # end the game via quitting
-    @winner = "noone"
-    @game_over = true
-    # return, the game is over without a winner
 
-    elsif ((action.to_i > 8) || (action.to_i < 0))   # chosen number must be valid (0-8)
+    if ((action.to_i > 8) || (action.to_i < 0))   # chosen number must be valid (0-8)
     puts "The number chosen must be between 0 and 8"
     return false
 
@@ -47,19 +50,20 @@ class Match
 
 
   def victory_check(player_name, player_icon)
-    player_victory = player_icon + player_icon + player_icon  # player's icon needs to appear consecutively 3 times
+    player_victory = [player_icon, player_icon, player_icon]  # player's icon needs to appear consecutively 3 times
 
 
-    victory_1 = @board[0]+@board[1]+@board[2]
-#    victory_2 = @board[3][4][5]
-#    victory_3 = @board[6][7][8]
-#    victory_4 = @board[0][3][6]
-#    victory_5 = @board[1][4][7]
-#    victory_6 = @board[2][5][8]
-#    victory_7 = @board[0][4][8]
-#    victory_8 = @board[2][4][6]
+    victory_1 = [@board[0], @board[1], @board[2]]
+    victory_2 = [@board[3], @board[4], @board[5]]
+    victory_3 = [@board[6], @board[7], @board[8]]
+    victory_4 = [@board[0], @board[3], @board[6]]
+    victory_5 = [@board[1], @board[4], @board[7]]
+    victory_6 = [@board[2], @board[5], @board[8]]
+    victory_7 = [@board[0], @board[4], @board[8]]
+    victory_8 = [@board[2], @board[4], @board[6]]
 
-    if (player_victory==victory_1) #|| (player_victory.eql?(victory_2))
+    if ((player_victory.eql?(victory_1)) #|| (player_victory.eql?(victory_2)) || (player_victory.eql?(victory_3)) || (player_victory.eql?(victory_4)) ||
+(player_victory.eql?(victory_5)) || (player_victory.eql?(victory_6)) || (player_victory.eql?(victory_7)) || (player_victory.eql?(victory_8)))
        @winner = player_name
       @game_over = true
     else
@@ -67,11 +71,10 @@ class Match
     end
 
 =begin
-  # victory_test = [@board[0,1,2], @board[3,4,5], @board[6,7,8], @board[0,3,6], @board[1,4,7], @board[2,5,8], @board[0,4,8], @board[2,4,6]]  # winning with 3 in a row based on the game board
-
+  # victory_test = [@board[0,1,2], @board[3,4,5], @board[6,7,8], @board[0,3,6], @board[1,4,7], @board[2,5,8], @board[0,4,8], @board[2,4,6]]  # winning with 3 in
+a row based on the game board
     i = 1
     while i < 9
-
       if victory_[i].include?(player_victory)
       @winner = player_name
       @game_over = true
@@ -80,11 +83,9 @@ class Match
       end # end of if statement
       i+=1
     end
-
     if @game_over != true
       return
     end # end of if statement
-
 =end
   end  # end of victory_check method
 
@@ -99,6 +100,9 @@ class Match
 
 end   # end of Match class
 
+  def show_game_turn(game_turn)   # show the game turn
+    puts game_turn
+  end
 
 
 player1 = Player.new
@@ -119,6 +123,7 @@ player2.name = gets.chomp
 
 
 while (!tic_tac.game_over || tic_tac.board.include?("")) # game is over when game is over or when all squares are taken without a winner (game over)
+  show_game_turn(game_turn)
   tic_tac.show_board
   tic_tac.turn(player1.name, player1.icon)
   tic_tac.show_board
