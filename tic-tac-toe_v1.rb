@@ -7,7 +7,7 @@ end
 class Match
   attr_accessor :board, :game_over, :winner
 
-  def turn(player_name, player_icon)
+  def turn(player_name, player_icon, game_over)
     if @board.include?("E")
 
       puts "Please make your move #{player_name} -- remember to choose a number between 0 and 8 (or q to quit)"
@@ -21,7 +21,7 @@ class Match
 
       if valid_move(action)   # check the validity of the player's move
       @board[action.to_i] = player_icon
-     victory_check(player_name, player_icon)   # check victory conditions at end of each player's turn
+     victory_check(player_name, player_icon, game_over)   # check victory conditions at end of each player's turn
      else
       turn(player_name, player_icon)
       end   # end of if statement
@@ -56,7 +56,7 @@ class Match
   end # end of valid_move method
 
 
-  def victory_check(player_name, player_icon)
+  def victory_check(player_name, player_icon, game_over)
     player_victory = [player_icon, player_icon, player_icon]  # player's icon needs to appear consecutively 3 times
 
 
@@ -139,9 +139,9 @@ player2.name = gets.chomp
 while (tic_tac.game_over == false) # game is over when game is over or when all squares are taken without a winner (game over)
   show_game_turn(game_turn)
   tic_tac.show_board
-  tic_tac.turn(player1.name, player1.icon)
+  tic_tac.turn(player1.name, player1.icon, tic_tac.game_over)
   tic_tac.show_board
-  tic_tac.turn(player2.name, player2.icon)
+  tic_tac.turn(player2.name, player2.icon, tic_tac.game_over)
   game_turn+=1
 
 
