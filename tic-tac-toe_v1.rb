@@ -23,7 +23,7 @@ class Match
       @board[action.to_i] = player_icon
      victory_check(player_name, player_icon, game_over)   # check victory conditions at end of each player's turn
      else
-      turn(player_name, player_icon)
+      turn(player_name, player_icon, game_over)
       end   # end of if statement
 
     else
@@ -69,11 +69,8 @@ class Match
     victory_7 = [@board[0], @board[4], @board[8]]
     victory_8 = [@board[2], @board[4], @board[6]]
 
-    puts victory_1
-    puts victory_2
-    puts victory_8
 
-    if ((player_victory.eql?(victory_1)) #|| (player_victory.eql?(victory_2)) || (player_victory.eql?(victory_3)) || (player_victory.eql?(victory_4)) ||
+    if ((player_victory.eql?(victory_1)) | (player_victory.eql?(victory_2)) || (player_victory.eql?(victory_3)) || (player_victory.eql?(victory_4)) ||
 (player_victory.eql?(victory_5)) || (player_victory.eql?(victory_6)) || (player_victory.eql?(victory_7)) || (player_victory.eql?(victory_8)))
        @winner = player_name
       @game_over = true
