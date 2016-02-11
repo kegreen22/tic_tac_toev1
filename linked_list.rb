@@ -13,7 +13,7 @@ class LinkedList
     @head = Node.new(value, nil)
   end
 
-  def add(data)  # go to tail and insert new node
+  def insert(data)  # go to tail and insert new node
     current = @head
     while current.next_node != nil #keep searching until the end to add the link
       current = current.next_node
@@ -21,7 +21,7 @@ class LinkedList
     current.next_node = Node.new(data, nil)
   end
 
-  def delet(data)  # search for data to be deleted & reset the header and tail as needed
+  def delete(data)  # search for data to be deleted & reset the header and tail as needed
     current = @head
     if current.data == data
       @head = current.next_node  # if the head is the link to delete then reset the head to the next link (skip the former head)
@@ -36,8 +36,11 @@ class LinkedList
   end
 
   def show
-
-
+    current = @head
+    while current != nil
+      puts "Current node value is #{current.value}"
+      current = current.next_node
+    end
   end
 
 
