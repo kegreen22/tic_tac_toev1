@@ -13,5 +13,6 @@ arr
 
 end
 
+# example to test the sort
 array_test = [1, 5,3, 4, 6,3, 12, 24,17, 99, 102, 34]
 puts insertion_sort(array_test)
