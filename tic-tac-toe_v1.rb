@@ -78,23 +78,6 @@ class Match
       return
     end
 
-=begin
-  # victory_test = [@board[0,1,2], @board[3,4,5], @board[6,7,8], @board[0,3,6], @board[1,4,7], @board[2,5,8], @board[0,4,8], @board[2,4,6]]  # winning with 3 in
-a row based on the game board
-    i = 1
-    while i < 9
-      if victory_[i].include?(player_victory)
-      @winner = player_name
-      @game_over = true
-      #else
-      #return
-      end # end of if statement
-      i+=1
-    end
-    if @game_over != true
-      return
-    end # end of if statement
-=end
   end  # end of victory_check method
 
 
