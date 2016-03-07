@@ -69,8 +69,8 @@ class Match
     victory_7 = [@board[0], @board[4], @board[8]]
     victory_8 = [@board[2], @board[4], @board[6]]
 
-
-    if ((player_victory.eql?(victory_1)) | (player_victory.eql?(victory_2)) || (player_victory.eql?(victory_3)) || (player_victory.eql?(victory_4)) ||
+    # check different victory conditions to see if the current player has won the game
+    if ((player_victory.eql?(victory_1)) || (player_victory.eql?(victory_2)) || (player_victory.eql?(victory_3)) || (player_victory.eql?(victory_4)) ||
 (player_victory.eql?(victory_5)) || (player_victory.eql?(victory_6)) || (player_victory.eql?(victory_7)) || (player_victory.eql?(victory_8)))
        @winner = player_name
       @game_over = true
